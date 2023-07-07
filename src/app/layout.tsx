@@ -1,3 +1,4 @@
+import { Header } from "@/components/shared/header";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import "@/styles/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body className={inter.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <main className="relative min-h-screen bg-background flex flex-col items-center">
+              <Header />
               {children}
             </main>
           </ThemeProvider>
