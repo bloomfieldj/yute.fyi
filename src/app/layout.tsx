@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import "@/styles/globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
@@ -16,14 +17,35 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <main className="relative min-h-screen bg-background flex flex-col items-center">
-            {children}
-          </main>
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider
+      appearance={{
+        variables: {
+          colorPrimary: "hsl(222.2 84% 4.9%)",
+          colorBackground: "hsl(222.2 84% 4.9%)",
+          colorInputBackground: "hsl(217.2 32.6% 17.5%)",
+          colorAlphaShade: "white",
+          colorText: "white",
+          colorInputText: "white",
+          colorShimmer: "rgba(255,255,255,0.36)",
+          shadowShimmer: "1px 1px 2px rgba(0,0,0,0.36)",
+        },
+        elements: {
+          providerIcon__apple: { filter: "invert(1)" },
+          footerActionLink: "text-white hover:text-slate-200",
+          formButtonPrimary:
+            "bg-secondary text-secondary-foreground hover:bg-secondary/90",
+        },
+      }}
+    >
+      <html lang="en">
+        <body className={inter.className}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <main className="relative min-h-screen bg-background flex flex-col items-center">
+              {children}
+            </main>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
